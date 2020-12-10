@@ -23,4 +23,25 @@
         update T_RED_PACKET set stock = stock - 1 where id = #{id}
     </update>
 
+    <!--查询红包具体信息-->
+    <select id="getRedPacketForUpdate" parameterType="long" resultType="com.houx.pojo.RedPacket">
+        select
+              id,user_id userId,amount,send_date sendDate,total,
+              unit_amount unitAmount,stock,version,note
+        from
+              t_red_packet where id = #{id} for update;
+    </select>
+
+    <!--
+        通过版本号扣减抢红包
+        每更新一次，版本+1
+        其次增加对版本号的判断
+    -->
+    <update id="decreaseRedPacketForVersion">
+        update t_red_packet
+        set stock = stock - 1,version = sersion + 1
+        where id = #{id}
+        and version = #{version}
+    </update>
+
 </mapper>

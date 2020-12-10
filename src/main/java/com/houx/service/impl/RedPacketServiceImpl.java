@@ -29,4 +29,9 @@ public class RedPacketServiceImpl implements RedPacketService {
     public int decreaseRedPacket(Long id) {
         return redPacketDao.decreaseRedPacket(id);
     }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED)
+    public int decreaseRedPacketForVersion(Long redPacketId, Long userId) {
+        return redPacketDao.decreaseRedPacketForVersion(redPacketId,userId);
+    }
 }

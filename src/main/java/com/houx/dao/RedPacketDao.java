@@ -26,4 +26,7 @@ public interface RedPacketDao {
     public int decreaseRedPacket(Long id);
 
 
+    RedPacket getRedPacketForUpdate(Long id);
+
+    int decreaseRedPacketForVersion(Long redPacketId,Long userId);
 }
